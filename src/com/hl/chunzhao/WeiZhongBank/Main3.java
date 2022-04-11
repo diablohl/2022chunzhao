@@ -23,25 +23,17 @@ public class Main3 {
         int k = Integer.valueOf(s3[1]);
         BigInteger bigk = new BigInteger(String.valueOf(k));
         String s2 = s.nextLine();
-        int[] arr = new int[s2.length()];
-        for (int i = 0; i < s2.length(); i++) {
-            arr[i] = s2.charAt(i) - '0';
-        }
         int res=0;
-        List<BigInteger> list = new ArrayList<>();
-        for (int i = 0; i < arr.length; i++) {
-
-            for (int j = i+1; j <= arr.length; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = i+1; j <= n; j++) {
                 BigInteger bigInteger = new BigInteger(s2.substring(i,j));
                 BigInteger remainder = bigInteger.remainder(bigk);
-                if(remainder.toString()=="0") {
+                if(remainder.toString().equals("0")) {
                     res++;
-                    list.add(bigInteger);
                 }
             }
         }
         System.out.println(res);
-        System.out.println(list);
 
     }
 }

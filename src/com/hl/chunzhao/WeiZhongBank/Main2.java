@@ -22,31 +22,25 @@ public class Main2 {
         int n = sc.nextInt();
         int x = sc.nextInt();
         int y = sc.nextInt();
-        int[] arr = new int[n+x+y];
-        Arrays.fill(arr,2000000);
-        for (int i = x; i < arr.length-y; i++) {
+        int[] arr = new int[n];
+        for (int i = 0; i < arr.length; i++) {
             arr[i] = sc.nextInt();
         }
         Stack<Integer> sbig = new Stack<>();
         Stack<Integer> ssmall = new Stack<>();
-        ssmall.add(n+x);
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = arr.length-y-1; i >=x; i--) {
-            while (!ssmall.isEmpty()&&arr[i] < arr[ssmall.peek()]) {
-                ssmall.pop();
-            }
+        for (int i = arr.length-1; i >=0; i--) {
+            while (!ssmall.isEmpty()&&arr[i] < arr[ssmall.peek()]) ssmall.pop();
             int tmp = ssmall.isEmpty() ? y : ssmall.peek() - i - 1;
             map.put(i, tmp);
             ssmall.push(i);
         }
         sbig.add(x-1);
-        for (int i = x; i < arr.length-y; i++) {
-            while (!sbig.isEmpty()&&arr[i] < arr[sbig.peek()]) {
-                sbig.pop();
-            }
+        for (int i = 0; i < arr.length; i++) {
+            while (!sbig.isEmpty()&&arr[i] < arr[sbig.peek()]) sbig.pop();
             int tmp = sbig.isEmpty() ? x : i-sbig.peek() - 1;
             if (tmp>=x&&map.get(i)>=y){
-                System.out.println(i-1);
+                System.out.println(i+1);
                 return;
             }
         }
